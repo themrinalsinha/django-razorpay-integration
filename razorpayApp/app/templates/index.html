@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width">
+    </head>
+    <body>
+        <form action="" method="POST">  {% csrf_token %}
+            <script
+                src="https://checkout.razorpay.com/v1/checkout.js"
+                data-key={{ data.RKEY }}
+                data-amount={{ data.AMOUNT }}
+                data-buttontext="Pay with Razorpay"
+                data-name={{ data.COMPANY }}
+                data-description="Purchase Description"
+                data-prefill.name={{ data.NAME }}
+                data-prefill.contact={{ data.MOBILE }}
+                data-prefill.email={{ data.EMAIL }}
+                data-order_id={{ data.RP_ORDER_ID }}
+                data-theme.color="#F37254"
+            ></script>
+            <input type="hidden" value="Hidden Element" name="hidden">
+        </form>
+        {% if payment_id %}
+            {{ payment_id }}
+        {% endif %}
+    </body>
+</html>
