@@ -1,9 +1,16 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width">
+
+        <style>
+            .razorpay-payment-button {
+                visibility: hidden;
+            }
+        </style>
+
     </head>
     <body>
-        <form action="" method="POST">  {% csrf_token %}
+        <form id="payment" action="" method="POST">  {% csrf_token %}
             <script
                 src="https://checkout.razorpay.com/v1/checkout.js"
                 data-key={{ data.RKEY }}
@@ -22,5 +29,16 @@
         {% if payment_id %}
             {{ payment_id }}
         {% endif %}
+
+        {% if not payment_id %}
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+                crossorigin="anonymous"></script>
+            <script type="text/javascript">
+                $(document).ready(function(){
+                    $('#payment').submit();
+                });
+            </script>
+        {% endif %}
+
     </body>
 </html>
